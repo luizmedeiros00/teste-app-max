@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -43,7 +44,13 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        try {
+            $product = $this->model->create($request->all());
+            return response($product);
+        } catch(\Exception  $e){
+            return response('Não foi possível cadastrar o produto', 500);
+        }
+
     }
 
     /**
@@ -75,7 +82,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
         //
     }
