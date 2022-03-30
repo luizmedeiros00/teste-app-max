@@ -16,85 +16,67 @@ class ProductController extends Controller
     {
         $this->model = $model;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $products = $this->model->get();
+
+        return view('product.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('product.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreProductRequest $request)
     {
         try {
             $product = $this->model->create($request->all());
-            return response($product);
+
+            return view('product.show', compact('product'));
         } catch(\Exception  $e){
-            return response('Não foi possível cadastrar o produto', 500);
+            // return response([
+            //     'message'   => 'Não foi possível cadastrar o produto',
+            //     'error'     => $e->getMessage()
+            // ], 500);
         }
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $product = $this->model->findOrFail($id);
+
+        return view('product.show', compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $product = $this->model->findOrFail($id);
+
+        return view('product.create', compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateProductRequest $request, $id)
     {
-        //
+        try {
+            $product = $this->model->find($id);
+            $product->update($request->all());
+
+            return view('product.show', compact('product'));
+        } catch(\Exception  $e){
+            // return response([
+            //     'message'   => 'Não foi possível atualizar o produto',
+            //     'error'     => $e->getMessage()
+            // ], 500);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $product = $this->model->findOrFail($id);
+
+        $product->delete();
     }
 }
