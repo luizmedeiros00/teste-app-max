@@ -25,7 +25,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Novo Produto</div>
+                    <div class="card-header">{{$product->id == null ? 'Novo' : 'Editar'}} Produto</div>
                     <div class="card-body">
                         <form action="{{ $product->id == null ? '/products' : '/products/' . $product->id }}"
                             method="POST">
