@@ -34,7 +34,7 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         try {
-            $this->model->store($request->all());
+            $this->model->create($request->all());
 
             return back()->with('success', 'Produto cadastrado com sucesso');;
         } catch (\Exception  $e) {
