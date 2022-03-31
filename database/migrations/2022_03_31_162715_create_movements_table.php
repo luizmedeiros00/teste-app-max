@@ -18,7 +18,6 @@ class CreateMovementsTable extends Migration
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained();
             $table->integer('amount');
-            $table->enum('type', ['Entrada', 'Saída']);
             $table->timestamps();
         });
     }
