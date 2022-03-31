@@ -11,4 +11,14 @@ class Product extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = ['name', 'sku'];
+
+    public function inventory()
+    {
+        return $this->hasOne(Inventory::class);
+    }
+
+    public function movements()
+    {
+        return $this->hasMany(Movement::class);
+    }
 }
