@@ -26,22 +26,20 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('product.create');
+        $product = new Product();
+
+        return view('product.create', compact('product'));
     }
 
     public function store(StoreProductRequest $request)
     {
         try {
-            $product = $this->model->create($request->all());
+            $this->model->store($request->all());
 
-            return view('product.show', compact('product'));
-        } catch(\Exception  $e){
-            // return response([
-            //     'message'   => 'Não foi possível cadastrar o produto',
-            //     'error'     => $e->getMessage()
-            // ], 500);
+            return back()->with('success', 'Produto cadastrado com sucesso');;
+        } catch (\Exception  $e) {
+            return back()->withInput()->with('error', 'Erro ao cadastrar o produto');;
         }
-
     }
 
     public function show($id)
@@ -64,12 +62,9 @@ class ProductController extends Controller
             $product = $this->model->find($id);
             $product->update($request->all());
 
-            return view('product.show', compact('product'));
-        } catch(\Exception  $e){
-            // return response([
-            //     'message'   => 'Não foi possível atualizar o produto',
-            //     'error'     => $e->getMessage()
-            // ], 500);
+            return back()->withInput()->with('success', 'Produto atualizado com sucesso');;
+        } catch (\Exception  $e) {
+            return back()->withInput()->with('error', 'Erro ao atualizar o produto');;
         }
     }
 
