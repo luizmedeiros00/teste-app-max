@@ -31,7 +31,6 @@ class MovementController extends Controller
 
             return back()->withInput()->with('success', 'Produto baixado com sucesso');;
         } catch (\Exception  $e) {
-            dd($e->getMessage());
             return back()->withInput()->with('error', 'Erro ao baixar o produto');;
         }
     }
@@ -47,7 +46,6 @@ class MovementController extends Controller
 
             return back()->withInput()->with('success', 'Produto adicionado com sucesso');
         } catch (\Exception  $e) {
-            dd($e->getMessage(), $e->getLine());
             return back()->withInput()->with('error', 'Erro ao baixar o produto');;
         }
     }
