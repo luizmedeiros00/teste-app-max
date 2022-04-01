@@ -21,7 +21,8 @@ class MovementRepository extends BaseRepository implements MovementRepositoryInt
             'product_id'            => $data['product_id'],
             'amount'                => $data['amount'],
             'type_movement_id'      => self::REMOVE_TYPE,
-            'origin_movement_id'    => $data['origin_movement_id']
+            'origin_movement_id'    => $data['origin_movement_id'],
+            'user_id'               => auth()->user()->id
         ]);
     }
 
@@ -31,7 +32,8 @@ class MovementRepository extends BaseRepository implements MovementRepositoryInt
             'product_id'            => $data['product_id'],
             'amount'                => $data['amount'],
             'type_movement_id'      => self::ADD_TYPE,
-            'origin_movement_id'    => $data['origin_movement_id']
+            'origin_movement_id'    => $data['origin_movement_id'],
+            'user_id'               => auth()->user()->id
         ]);
     }
 }
