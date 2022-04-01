@@ -22,7 +22,7 @@ class MovementRepository extends BaseRepository implements MovementRepositoryInt
             'amount'                => $data['amount'],
             'type_movement_id'      => self::REMOVE_TYPE,
             'origin_movement_id'    => $data['origin_movement_id'],
-            'user_id'               => auth()->user()->id
+            'user_id'               => $data['user_id']
         ]);
     }
 
@@ -33,7 +33,7 @@ class MovementRepository extends BaseRepository implements MovementRepositoryInt
             'amount'                => $data['amount'],
             'type_movement_id'      => self::ADD_TYPE,
             'origin_movement_id'    => $data['origin_movement_id'],
-            'user_id'               => auth()->user()->id
+            'user_id'               => $data['user_id']
         ]);
     }
 }
