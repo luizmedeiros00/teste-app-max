@@ -5,20 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use App\Repository\Product\ProductRepositoryInterface;
 
 class ProductController extends Controller
 {
 
-    private $model;
+    private $repository;
 
-    public function __construct(Product $model)
+    public function __construct(ProductRepositoryInterface $repository)
     {
-        $this->model = $model;
+        $this->repository = $repository;
     }
 
     public function index()
     {
-        $products = $this->model->get();
+        $products = $this->repository->all();
 
         return view('product.index', compact('products'));
     }
@@ -33,7 +34,7 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         try {
-            $this->model->create($request->all());
+            $this->repository->create($request->all());
 
             return back()->with('success', 'Produto cadastrado com sucesso');;
         } catch (\Exception  $e) {
@@ -43,14 +44,14 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = $this->model->findOrFail($id);
+        $product = $this->repository->find($id);
 
         return view('product.show', compact('product'));
     }
 
     public function edit($id)
     {
-        $product = $this->model->findOrFail($id);
+        $product = $this->repository->find($id);
 
         return view('product.create', compact('product'));
     }
@@ -58,8 +59,7 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, $id)
     {
         try {
-            $product = $this->model->find($id);
-            $product->update($request->all());
+            $this->repository->update($id, $request->all());
 
             return back()->withInput()->with('success', 'Produto atualizado com sucesso');;
         } catch (\Exception  $e) {
@@ -69,8 +69,9 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        $product = $this->model->findOrFail($id);
+        $product = $this->repository->find($id);
 
         $product->delete();
     }
+
 }
