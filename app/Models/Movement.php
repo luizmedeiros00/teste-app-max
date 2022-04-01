@@ -9,7 +9,7 @@ class Movement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'user_id', 'amount', 'type'];
+    protected $fillable = ['product_id', 'user_id', 'amount', 'type_movement_id', 'origin_movement_id'];
 
     public function product()
     {
