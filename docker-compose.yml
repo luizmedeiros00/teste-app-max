@@ -1,0 +1,40 @@
+version: "3"
+
+networks:
+    app-max-network:
+        driver: bridge
+
+services:
+    app:
+        build: .
+        container_name: app-max
+        working_dir: "/var/www/html"
+        networks:
+            - app-max-network
+        volumes:
+            - "./:/var/www/html"
+        ports:
+            - "8000:80"
+
+    database:
+        image: postgres:13.3
+        container_name: app-max-database
+        networks:
+            - app-max-network
+        ports:
+            - "5432:5432"
+        volumes:
+            - "/opt/postgres:/var/lib/postgresql/data"
+        environment:
+            - POSTGRES_USER=pgsql
+            - POSTGRES_PASSWORD=pgsql
+            - POSTGRES_DB=app_max_db
+
+    sqlite:
+        image: nouchka/sqlite3
+        container_name: sqlite
+        networks:
+            - app-max-network
+        stdin_open: true
+        tty: true
+
