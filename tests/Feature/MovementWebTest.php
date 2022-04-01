@@ -18,7 +18,7 @@ class MovementWebTest extends TestCase
 
         $user = User::factory()->create();
 
-        $this->actingAs($user)
+        $response = $this->actingAs($user)
             ->post('/adicionar-produto', [
                 'product_id' => $product->id,
                 'amount'    => 100
