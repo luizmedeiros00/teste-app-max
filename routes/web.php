@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/adicionar-produto', [App\Http\Controllers\Web\MovementController::class, 'add']);
+Route::post('/baixar-produto', [App\Http\Controllers\Web\MovementController::class, 'remove']);
+
 Route::resource('products', ProductController::class);
 
 Route::get('/', function () {
