@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Models\Inventory;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Contracts\Validation\DataAwareRule;
 
@@ -18,7 +19,9 @@ class RemoveProductInventory implements Rule, DataAwareRule
      */
     public function passes($attribute, $value)
     {
-        dd($this->data);
+        $inventory = Inventory::where('product_id', $this->data['product_id'])->first();
+
+        return $inventory->current_amount >= $value;
     }
 
     /**
@@ -28,7 +31,7 @@ class RemoveProductInventory implements Rule, DataAwareRule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'A quantidade do produto em estoque é insuficiente';
     }
 
     public function setData($data)
