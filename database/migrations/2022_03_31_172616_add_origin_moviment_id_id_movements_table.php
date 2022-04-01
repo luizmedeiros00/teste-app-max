@@ -14,7 +14,7 @@ class AddOriginMovimentIdIdMovementsTable extends Migration
     public function up()
     {
         Schema::table('movements', function (Blueprint $table) {
-            $table->foreignId('origin_movement_id')->constrained();
+            $table->foreignId('origin_movement_id')->nullable()->constrained();
         });
     }
 
