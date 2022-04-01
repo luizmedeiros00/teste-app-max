@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Movement;
 use App\Models\Product;
+use App\Observers\MovementObserver;
 use App\Observers\ProductObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -29,5 +31,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Product::observe(ProductObserver::class);
+        Movement::observe(MovementObserver::class);
     }
 }
