@@ -16,7 +16,7 @@ class MovementObserver
     public function created(Movement $movement)
     {
         $inventory = $movement->product->inventory;
-
+        
         if ($movement->type_movement_id == 1) {
             $inventory->current_amount = $inventory->current_amount + $movement->amount;
         } else {
