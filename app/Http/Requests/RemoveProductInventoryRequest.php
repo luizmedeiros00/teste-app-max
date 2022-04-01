@@ -26,8 +26,20 @@ class RemoveProductInventoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_id'    => 'required|numeric|exists:products',
+            'product_id'    => 'required|numeric|exists:products,id',
             'amount'        => ['required','numeric', new RemoveProductInventory]
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'product_id.required'   => 'O produto é obrigatório',
+            'product_id.numeric'    => 'O produto deve ser do tipo numérico',
+            'product_id.exists'     => 'O produto não existe',
+
+            'amount.required'       => 'A quantidade é obrigatória',
+            'amount.numeric'        => 'A quantidade deve ser do tipo número',
         ];
     }
 }
