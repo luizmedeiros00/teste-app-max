@@ -14,7 +14,7 @@ class AddTypeMovimentIdIdMovementsTable extends Migration
     public function up()
     {
         Schema::table('movements', function (Blueprint $table) {
-            $table->foreignId('type_movement_id')->constrained();
+            $table->foreignId('type_movement_id')->nullable()->constrained();
         });
     }
 
