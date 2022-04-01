@@ -26,6 +26,7 @@ class MovementController extends Controller
             $record = $request->all();
 
             $record['origin_movement_id'] = self::ORIGIN_WEB;
+            $record['user_id'] = auth()->user()->id;
 
             $this->repository->remove($record);
 
@@ -39,8 +40,9 @@ class MovementController extends Controller
     {
         try {
             $record = $request->all();
-
+            
             $record['origin_movement_id'] = self::ORIGIN_WEB;
+            $record['user_id'] = auth()->user()->id;
             
             $this->repository->add($record);
 
