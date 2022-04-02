@@ -23,8 +23,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('reports', [MovementController::class, 'report'])->name('reports');
 
-    Route::get('/adicionar-produto', [ProductController::class, 'add']);
-    Route::get('/remover-produto', [ProductController::class, 'remove']);
+    Route::get('/adicionar-produto', [ProductController::class, 'add'])->name('products.add');
+    Route::get('/remover-produto', [ProductController::class, 'remove'])->name('products.remove');
 
     
     Route::post('/adicionar-produto', [MovementController::class, 'add'])->name('movements.adicionar-produto');
