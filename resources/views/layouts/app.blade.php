@@ -24,7 +24,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -81,7 +81,7 @@
             </div>
         </nav>
         @if (Auth::check())
-            <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08"
                     aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
