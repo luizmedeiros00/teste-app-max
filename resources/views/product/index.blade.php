@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+    @include('partials.alerts')
         <div class="row justify-content-center">
 
             <div class="col-md-10">
@@ -24,10 +25,16 @@
                                         <td>{{ $product->sku }}</td>
                                         <td>{{ $product->inventory->current_amount }}</td>
                                         <td>
-                                            <div class="d-grid gap-2 d-md-block">
+                                            <div >
                                                 <a href="{{ route('products.edit', ['product' => $product->id]) }}"
                                                     class="btn btn-primary btn-sm">editar</a>
-                                                <button class="btn btn-danger btn-sm">deletar</button>
+                                                <form action="{{ route('products.destroy', ['product' => $product->id]) }}"
+                                                    method="post">
+                                                    <input class="btn btn-danger btn-sm" type="submit" value="deletar" />
+                                                    @method('delete')
+                                                    @csrf
+                                                </form>
+                                       
                                             </div>
                                         </td>
                                     </tr>
