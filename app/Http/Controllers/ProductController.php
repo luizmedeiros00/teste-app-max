@@ -50,9 +50,9 @@ class ProductController extends Controller
         try {
             $this->repository->create($request->all());
 
-            return back()->with('success', 'Produto cadastrado com sucesso');;
+            return back()->with('success', 'Produto cadastrado com sucesso');
         } catch (\Exception  $e) {
-            return back()->withInput()->with('error', 'Erro ao cadastrar o produto');;
+            return back()->withInput()->with('error', 'Erro ao cadastrar o produto');
         }
     }
 
@@ -75,17 +75,22 @@ class ProductController extends Controller
         try {
             $this->repository->update($id, $request->all());
 
-            return back()->withInput()->with('success', 'Produto atualizado com sucesso');;
+            return back()->withInput()->with('success', 'Produto atualizado com sucesso');
         } catch (\Exception  $e) {
-            return back()->withInput()->with('error', 'Erro ao atualizar o produto');;
+            return back()->withInput()->with('error', 'Erro ao atualizar o produto');
         }
     }
 
     public function destroy($id)
     {
-        $product = $this->repository->find($id);
+        try {
+            $product = $this->repository->find($id);
 
-        $product->delete();
+            $product->delete();
+
+            return back()->with('success', 'Produto deletado com sucesso');
+        } catch (\Exception  $e) {
+            return back()->withInput()->with('error', 'Erro ao deletar o produto');
+        }
     }
-
 }
