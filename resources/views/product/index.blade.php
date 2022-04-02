@@ -3,15 +3,18 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
+
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Produtos</div>
-
+                    <div class="card-header">
+                        Produtos
+                    </div>
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <th>Nome</th>
                                 <th>SKU</th>
+                                <th>Quantidade</th>
                                 <th>Ações</th>
                             </thead>
                             <tbody>
@@ -19,10 +22,12 @@
                                     <tr>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->sku }}</td>
+                                        <td>{{ $product->inventory->current_amount }}</td>
                                         <td>
                                             <div class="d-grid gap-2 d-md-block">
-                                                <a href="{{route('products.edit', ['product' => $product->id])}}" class="btn btn-primary btn-sm">editar</a>
-                                                   <button class="btn btn-danger btn-sm">deletar</button>
+                                                <a href="{{ route('products.edit', ['product' => $product->id]) }}"
+                                                    class="btn btn-primary btn-sm">editar</a>
+                                                <button class="btn btn-danger btn-sm">deletar</button>
                                             </div>
                                         </td>
                                     </tr>
