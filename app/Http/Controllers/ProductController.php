@@ -17,6 +17,20 @@ class ProductController extends Controller
         $this->repository = $repository;
     }
 
+    public function add()
+    {
+        $products = $this->repository->all();
+
+        return view('product.add', compact('products'));
+    }
+
+    public function remove()
+    {
+        $products = $this->repository->all();
+
+        return view('product.remove', compact('products'));
+    }
+
     public function index()
     {
         $products = $this->repository->all();
