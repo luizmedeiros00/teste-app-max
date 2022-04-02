@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Models\Movement;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\MovementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +21,14 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->route('products.index');
     });
 
+    Route::get('reports', [MovementController::class, 'report'])->name('reports');
+
+    Route::get('/adicionar-produto', [ProductController::class, 'add']);
+    Route::get('/remover-produto', [ProductController::class, 'remove']);
+
     
-    Route::post('/adicionar-produto', [App\Http\Controllers\Web\MovementController::class, 'add']);
-    Route::post('/baixar-produto', [App\Http\Controllers\Web\MovementController::class, 'remove']);
+    Route::post('/adicionar-produto', [MovementController::class, 'add'])->name('movements.adicionar-produto');
+    Route::post('/baixar-produto', [MovementController::class, 'remove'])->name('movements.remover-produto');
     Route::resource('products', ProductController::class);
 });
 
