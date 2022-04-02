@@ -20,4 +20,14 @@ class Movement extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function typeMovement()
+    {
+        return $this->belongsTo(TypeMovement::class);
+    }
+
+    public function originMovement()
+    {
+        return $this->belongsTo(OriginMovement::class);
+    }
 }
