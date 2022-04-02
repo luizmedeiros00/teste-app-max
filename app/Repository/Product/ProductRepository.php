@@ -11,4 +11,11 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     {
         parent::__construct(new Product());
     }
+
+    public function withLowInventory($amount = 100)
+    {
+        return $this->model->whereHas('inventory', function ($q) use ($amount) {
+            return $q->where('current_amount', '<', $amount);
+        })->get();
+    }
 }
