@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             'email'     => 'teste@email.com',
             'password'  => Hash::make('teste123')
         ]);
-        \App\Models\Product::factory(10)->create();
+        // \App\Models\Product::factory(10)->create();
         $this->call(OriginMovementSeeder::class);
         $this->call(TypeMovementSeeder::class);
     }
