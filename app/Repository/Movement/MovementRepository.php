@@ -9,10 +9,33 @@ class MovementRepository extends BaseRepository implements MovementRepositoryInt
 {
     const REMOVE_TYPE = 2;
     const ADD_TYPE = 1;
-    
+
     public function __construct()
     {
         parent::__construct(new Movement());
+    }
+
+    public function report(array $request)
+    {
+        $query = $this->model->newQuery();
+
+        $fields = array_filter(
+            array_map('trim', $request)
+        );
+
+        if(isset($fields['data_inicial'])){
+            $query->where('created_at', '>=', $fields['data_inicial'] . " 00:00:00");
+        }
+
+        if(isset($fields['data_final'])){
+            $query->where('created_at', '<=', $fields['data_final'] . " 23:59:59");
+        }
+
+        if(isset($fields['product_id'])){
+            $query->where('product_id', $fields['product_id']);
+        }
+
+        return $query->get();
     }
 
     public function remove(array $data)
